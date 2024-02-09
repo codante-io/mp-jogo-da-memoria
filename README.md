@@ -1,6 +1,3 @@
-O texto fornecido está bem escrito, mas há algumas pequenas correções gramaticais e de formatação que podem ser feitas para aprimorar a clareza. Aqui estão as alterações sugeridas:
-
----
 # Jogo da Memória
 
 Vamos criar um jogo da memória? Vamos testar nossas habilidades com uma combinação de tecnologias incríveis, incluindo React JS, Typescript e Tailwind CSS. Juntos, vamos desenvolver um empolgante jogo da memória inspirado em um dos animes mais icônicos de todos os tempos: **Dragon Ball Z**.
