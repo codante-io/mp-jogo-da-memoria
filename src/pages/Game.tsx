@@ -3,11 +3,12 @@ import Card from '../components/Card';
 import Header from '../components/Header';
 import { ICard, data } from '../utils/data';
 import context from '../context/context';
+import Alert from '../components/Alert';
 
 function Game() {
-  const { setFlag } = useContext(context);
+  const { setFlag, timer, setTimer } = useContext(context);
   const [cards, setCards] = useState<ICard[]>([]);
-  // const [win, setWin] = useState(false);
+  const [win, setWin] = useState(false);
   const [choiceOne, setChoiceOne] = useState<ICard | null>(null);
   const [choiceTwo, setChoiceTwo] = useState<ICard | null>(null);
   const [disabled, setDisabled] = useState(false);
@@ -20,7 +21,7 @@ function Game() {
     setCards(shuffledCards);
     setChoiceOne(null);
     setChoiceTwo(null);
-    // setWin(false);
+    setWin(false);
   };
 
   const handleChoice = (card: ICard) => {
@@ -67,7 +68,7 @@ function Game() {
     if (cards.length > 0) {
       const allGrayscaleTrue = cards.every((card) => card.grayScale);
       if (allGrayscaleTrue) {
-        // setWin(true);
+        setWin(true);
         setFlag(true);
       }
     }
@@ -75,13 +76,15 @@ function Game() {
 
   useEffect(() => {
     shuffleCards();
-  }, []);
+    setFlag(false);
+    setTimer(0);
+  }, [setFlag, setTimer]);
 
   return (
     <div className="w-screen h-screen max-h-screen bg-[url(/images/kame.jpeg)] bg-cover bg-no-repeat bg-center">
       <div className="flex flex-col items-center justify-center w-5/6 h-full gap-1 py-5 m-auto my-0 lg:p-5">
         <Header />
-        <div className="grid h-full grid-cols-2 gap-3 py-1 overflow-y-auto lg:px-10 lg:grid-cols-5">
+        <div className="grid h-full grid-cols-2 gap-5 py-1 overflow-y-auto lg:px-10 lg:grid-cols-5">
           {cards.map((card) => (
             <Card
               key={card.id}
@@ -93,6 +96,18 @@ function Game() {
           ))}
         </div>
       </div>
+      {win && (
+        <div>
+          <Alert
+            position="center"
+            icon="success"
+            title="Parabéns!!"
+            text={`Seu tempo foi de ${timer} segundos`}
+            showConfirmButton
+            confirmButtonText="Jogar novamente"
+          />
+        </div>
+      )}
     </div>
   );
 }
