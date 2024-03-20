@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Game from './pages/Game';
 import Login from './pages/Login';
+import NotFound from './pages/404';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         path="/"
         Component={Login}
       />
+      <Route path="*" Component={NotFound} />
     </Routes>
 
   );
